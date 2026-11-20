@@ -1,141 +1,106 @@
-# 📧 Spam Email Classifier
+📧 Spam Email Classifier
 
-A complete Machine Learning project that classifies email/SMS messages as **Spam** or **Not Spam (Ham)** using a **Multinomial Naive Bayes** classifier with **TF-IDF** text vectorization, wrapped in an interactive **Streamlit** web application.
+A machine learning web app that classifies an email / SMS message as Spam or Not Spam (Ham) using NLP preprocessing, TF-IDF features and a Multinomial Naive Bayes classifier. The app is built with Streamlit and shows the prediction, confidence score and a model performance dashboard.
 
----
+Developed as part of a 1-month internship at Codec Technologies.
 
-## 📁 Project Structure
-
-```
-spam_classifier/
-│
+📌 Features
+Classifies a message as Spam or Not Spam (Ham)
+Shows prediction confidence and probability breakdown
+Sidebar model dashboard with Accuracy, Precision, Recall, F1-Score and Confusion Matrix
+Built-in example messages for quick testing
+Complete NLP pipeline: lowercasing, URL/punctuation/number removal, stopword removal and stemming
+Jupyter notebooks for data exploration
+Project report and viva Q&A included
+🛠️ Tech Stack
+Category	Tools
+Language	Python 3
+Data Handling	Pandas, NumPy
+NLP	NLTK (stopwords, Porter Stemmer)
+ML	scikit-learn (TF-IDF, Multinomial Naive Bayes)
+Visualization	Matplotlib
+Web App	Streamlit
+📂 Project Structure
+Spam_Email_Classifier/
+├── .devcontainer/                  # Dev container configuration
 ├── dataset/
-│   └── spam_emails.csv          # Labeled dataset (text, label)
-│
-├── notebooks/
-│   └── spam_classifier_analysis.ipynb   # EDA & model building notebook
-│
-├── models/
-│   ├── model.pkl                 # Trained Naive Bayes model (generated)
-│   ├── vectorizer.pkl             # Fitted TF-IDF vectorizer (generated)
-│   ├── metrics.pkl                # Evaluation metrics (generated)
-│   └── confusion_matrix.png       # Confusion matrix plot (generated)
-│
-├── app.py                         # Streamlit web application
-├── train_model.py                 # Model training script (run this first)
-├── requirements.txt               # Python dependencies
-└── README.md                      # Project documentation
-```
+│   └── spam_emails.csv             # Dataset (text, label)
+├── models/                         # Saved after training
+│   ├── model.pkl                   # Trained Naive Bayes model
+│   ├── vectorizer.pkl              # Fitted TF-IDF vectorizer
+│   ├── metrics.pkl                 # Evaluation metrics
+│   └── confusion_matrix.png        # Confusion matrix plot
+├── notebooks/                      # EDA and experiments
+├── app.py                          # Streamlit web application
+├── train_model.py                  # Model training script
+├── requirements.txt                # Python dependencies
+├── Project_Report.docx             # Detailed project report
+├── Viva_Questions_and_Answers.docx # Viva preparation
+└── README.md
+⚙️ Methodology
+Data Loading: Read the labelled dataset (text, label).
+Data Cleaning: Remove missing values and duplicate emails, map ham → 0 and spam → 1.
+Text Preprocessing: Lowercase, remove URLs, punctuation and numbers, tokenize, remove stopwords, apply Porter stemming.
+Feature Extraction: TF-IDF vectorization (top 3000 features).
+Train-Test Split: 80% training / 20% testing (stratified).
+Model Training: Multinomial Naive Bayes.
+Evaluation: Accuracy, Precision, Recall, F1-Score and Confusion Matrix.
+Deployment: Save model with Pickle and serve predictions through Streamlit.
+📊 Results
+Metric	Score
+Accuracy	fill after training
+Precision	fill after training
+Recall	fill after training
+F1-Score	fill after training
 
----
+Run python train_model.py and copy the printed scores into this table.
 
-## 🎯 Objective
+🚀 Installation & Usage
 
-Build a machine learning system that automatically distinguishes between **spam** (unwanted/promotional/fraudulent) messages and **ham** (legitimate) messages, and serve predictions through an easy-to-use web interface.
+1. Clone the repository
 
----
+bash
+git clone https://github.com/ravindra-das-aiml/Spam_Email_Classifier.git
+cd Spam_Email_Classifier
 
-## 🛠️ Technologies Used
+2. Install dependencies
 
-| Technology     | Purpose                                  |
-|-----------------|-------------------------------------------|
-| Python          | Core programming language                |
-| Pandas          | Data loading and manipulation             |
-| NumPy           | Numerical operations                      |
-| Scikit-learn    | ML model, TF-IDF, evaluation metrics      |
-| NLTK            | Stopword removal & stemming               |
-| Matplotlib      | Visualization (confusion matrix, EDA)     |
-| Streamlit       | Interactive web application               |
-| Pickle          | Model serialization/deserialization       |
-
----
-
-## ⚙️ Machine Learning Workflow
-
-1. **Data Loading** – Read the labeled dataset (`text`, `label`) from CSV.
-2. **Data Cleaning** – Remove nulls/duplicates, encode labels (ham=0, spam=1).
-3. **Text Preprocessing** – Lowercasing, URL/punctuation/number removal.
-4. **Tokenization** – Split text into word tokens.
-5. **Stopword Removal & Stemming** – Remove common words, reduce words to root form.
-6. **TF-IDF Vectorization** – Convert text into numerical feature vectors (top 3000 features).
-7. **Train-Test Split** – 80% training, 20% testing (stratified).
-8. **Model Training** – Multinomial Naive Bayes classifier.
-9. **Evaluation** – Accuracy, Precision, Recall, F1-Score, Confusion Matrix.
-10. **Model Persistence** – Save model & vectorizer using `pickle`.
-
----
-
-## 💻 Installation & Setup
-
-### 1. Clone / Download the project
-```bash
-cd spam_classifier
-```
-
-### 2. Create a virtual environment (recommended)
-```bash
-python -m venv venv
-source venv/bin/activate      # On Windows: venv\Scripts\activate
-```
-
-### 3. Install dependencies
-```bash
+bash
 pip install -r requirements.txt
-```
 
-### 4. Train the model
-This generates `model.pkl`, `vectorizer.pkl`, `metrics.pkl`, and `confusion_matrix.png` inside `models/`.
-```bash
+3. Train the model (run once)
+
+bash
 python train_model.py
-```
 
-### 5. Run the Streamlit web app
-```bash
+4. Run the app
+
+bash
 streamlit run app.py
-```
 
-The app will open automatically in your browser at `http://localhost:8501`.
+Open http://localhost:8501 in your browser.
 
----
+Note: NLTK stopwords are downloaded automatically on the first run, so an internet connection is needed once.
 
-## 🖥️ Using the Web App
+🧪 Example
+Message	Prediction
+Congratulations! You've WON a free iPhone! Call now to claim your prize!	🚨 Spam
+Hey, are we still meeting for lunch tomorrow at noon?	✅ Not Spam
+📸 Screenshots
 
-1. Enter (or select an example) email/message text in the text box.
-2. Click **"🔍 Classify Message"**.
-3. View the prediction: **SPAM** 🚨 or **NOT SPAM (HAM)** ✅, along with the confidence percentage.
-4. Check the sidebar **Model Dashboard** for accuracy, precision, recall, F1-score, and the confusion matrix.
+Add screenshots of the app here.
 
----
+![Home](screenshots/home.png)
+![Result](screenshots/result.png)
+🔮 Future Improvements
+Try other models (SVM, Logistic Regression, Random Forest, LSTM, BERT)
+Train on a larger and more diverse dataset
+Add email header and URL based features
+Deploy as a public web app
+🎓 Internship
 
-## 📊 Model Performance
+This project was developed during a 1-month internship at Codec Technologies.
 
-Run `train_model.py` to generate live metrics. On the included dataset, the model achieves:
+👤 Author
 
-- **Accuracy:** ~95–100%
-- **Precision:** High precision on spam detection
-- **Recall:** High recall on spam detection
-- **F1-Score:** Balanced performance metric
-
-*(Exact values are printed during training and displayed on the Streamlit dashboard.)*
-
----
-
-## 📓 Notebook
-
-`notebooks/spam_classifier_analysis.ipynb` contains a step-by-step exploratory data analysis and model-building walkthrough, including class distribution plots, message-length analysis, and the full training pipeline.
-
----
-
-## 🔮 Future Improvements
-
-- Use a larger, real-world dataset (e.g., SMS Spam Collection / Enron Spam dataset).
-- Experiment with other algorithms (Logistic Regression, SVM, Random Forest, deep learning).
-- Add support for multiple languages.
-- Deploy the app on Streamlit Cloud / Heroku / AWS.
-- Add email header analysis (sender domain, attachments) for richer features.
-
----
-
-## 👤 Author
-
-Spam Email Classifier — AI/ML Mini Project
+Ravindra Das GitHub: @ravindra-das-aiml
